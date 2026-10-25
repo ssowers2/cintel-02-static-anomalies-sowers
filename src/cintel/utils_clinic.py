@@ -1,10 +1,14 @@
 """utils_clinic.py.
 
+Author: Sabriya Sowers
+Date: 2026-10-25
+
 Shared helper functions for the clinic anomaly-detection domain.
 
 Used by:
 - src/cintel/anomaly_detector.py (cintel-02)
 - app.py
+
 """
 
 from pathlib import Path

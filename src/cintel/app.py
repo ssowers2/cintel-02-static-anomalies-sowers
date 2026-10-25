@@ -1,5 +1,8 @@
 """app.py - Reactive marimo app for this project.
 
+Author: Sabriya Sowers
+Date: 2026-10-25
+
 Marimo adds reactive controls.
 Every function below is a marimo cell.
 
@@ -32,6 +35,7 @@ PLAN CELLS FIRST
 Note: marimo triggers @app.cell functions automatically; we never call them.
 The names starting with "_" are for our own organization; the engine ignores
 them.
+
 """
 
 # === ONLY THIS AT THE TOP OF THE FILE ===
