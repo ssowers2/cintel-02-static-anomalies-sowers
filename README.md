@@ -13,29 +13,30 @@
 
 ## Project Overview
 
-Author: Denise Case
+**Author:** Sabriya Sowers
+**Date:** October 2026
 
-Date: 2026 October
+This project explores static anomaly detection using fictional pediatric clinic data.
 
-This project introduces anomaly detection using a static dataset.
+The goal is to use Python and Polars to identify patient records with unusual age or height values based on predefined thresholds. Flagged records are saved for further review to help identify potential data quality issues.
 
-The goal is to load data, identify observations that meet
-defined anomaly criteria, and save the results for review.
-
-The project is configured in
-[pyproject.toml](pyproject.toml).
+The project is configured in [pyproject.toml](pyproject.toml).
 
 ## Data
 
-The example uses clinic visit data from `data/`.
 
-Each observation includes:
+## Data
 
-- `age_years` - age in years.
-- `height_inches` - height in inches.
+This project uses a fictional pediatric clinic dataset located in `data/clinic_data.csv`.
 
-The example demonstrates threshold-based detection.
-Thresholds are instructional examples, not clinical standards.
+Each patient observation includes:
+
+- `age_years` - Patient age in years.
+- `height_inches` - Patient height in inches.
+
+The dataset is used to explore how predefined thresholds can identify unusual patient measurements that may require further investigation.
+
+The thresholds are for instructional purposes and are not clinical standards.
 
 ## Approach
 
