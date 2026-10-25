@@ -20,10 +20,30 @@ This project explores static anomaly detection using fictional pediatric clinic 
 
 The goal is to use Python and Polars to identify patient records with unusual age or height values based on predefined thresholds. Flagged records are saved for further review to help identify potential data quality issues.
 
+## Proposed Customization: Pediatric Data Quality Validation
+
+This project will expand on the original static anomaly detection example by introducing additional data quality checks using fictional pediatric patient data.
+
+### Objective
+
+The goal is to identify potential data quality issues that may affect the accuracy and reliability of healthcare reporting.
+
+### Planned Enhancements
+
+- **Missing Values:** Identify records with missing patient ages or heights.
+- **Invalid Ages:** Flag records containing negative age values.
+- **Unusual Measurements:** Continue using predefined thresholds to identify unusual patient ages and heights.
+- **Exception Reporting:** Generate a CSV file containing records that require further review.
+
+### Tools and Techniques
+
+The project will continue using Python and Polars for data processing, rule-based anomaly detection, and CSV reporting.
+
+### Expected Outcome
+
+The customized project will demonstrate how automated data quality checks can help identify potential errors and inconsistencies before data is used for reporting. Flagged records will be treated as exceptions requiring investigation rather than automatically classified as incorrect data.
+
 The project is configured in [pyproject.toml](pyproject.toml).
-
-## Data
-
 
 ## Data
 
