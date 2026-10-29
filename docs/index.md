@@ -107,10 +107,9 @@ new observations arrive in a monitoring system.
 
 **What I Learned:** Even a small adjustment to a threshold can change which records are flagged for review. This demonstrates why data quality rules and thresholds should be carefully defined and documented.
 
-
 ### Experiment Results Comparison
 
-| Measurement | Original Ex | Modified Experiment |
+| Measurement | Original | Modified |
 |---|---|---|
 | Height threshold | 72 inches | 70 inches |
 | Age threshold | 16 years | 16 years |
