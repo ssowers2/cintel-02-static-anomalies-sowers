@@ -19,7 +19,7 @@ The dataset contains 22 patient observations with:
 
 [View Example Dataset](https://github.com/denisecase/cintel-02-static-anomalies/blob/main/data/clinic_data.csv)
 
-## Methods
+## Original Example Methods
 
 The pipeline uses Python and Polars to read the data
 and identify observations meeting either condition:
@@ -31,7 +31,7 @@ These are example screening rules, not clinical standards.
 
 Records meeting either condition are saved as anomalies.
 
-## Results
+## Original Example Results
 
 The example pipeline identified **3 anomalous records**.
 
@@ -82,9 +82,9 @@ new observations arrive in a monitoring system.
 
 ## Project Links
 
-- [GitHub Repository](https://github.com/denisecase/cintel-02-static-anomalies)
-- [Example Pipeline](https://github.com/denisecase/cintel-02-static-anomalies/blob/main/src/cintel/anomaly_detector.py)
-- [Results and Artifacts](https://github.com/denisecase/cintel-02-static-anomalies/tree/main/artifacts)
+- [GitHub Repository](https://github.com/ssowers2/cintel-02-static-anomalies-sowers)
+- [My Anomaly Detection Pipeline](https://github.com/ssowers2/cintel-02-static-anomalies-sowers/blob/main/src/cintel/anomaly_detector.py)
+- [My Results and Artifacts](https://github.com/ssowers2/cintel-02-static-anomalies-sowers/tree/main/artifacts)
 
 ## Project Resources
 
@@ -92,3 +92,29 @@ new observations arrive in a monitoring system.
 - [Professional Python Guide](https://denisecase.github.io/pro-analytics-02/)
 - [Professional Python Project Explainer](https://pup-pack.github.io/professional-python-project-explainer/).
 - [Suggested Datasets](https://denisecase.github.io/pro-analytics-02/reference/datasets/cintel/)
+
+## Custom Modifications
+
+### Experiment 1: Adjusting the Height Threshold
+
+**Modification:** Changed the height threshold from 72 inches to 70 inches in `src/cintel/anomaly_detector.py`.
+
+**Reason:** I wanted to see how changing a predefined threshold would affect the number of anomalies identified.
+
+**Prediction:** If I lowered the height threshold from 72 to 70 inches, I expected the program to identify four anomalies instead of three because an additional record would meet the new threshold.
+
+**Results:** After running the pipeline, the program identified four anomalies out of 22 patient records, compared to three with the original threshold.
+
+**What I Learned:** Even a small adjustment to a threshold can change which records are flagged for review. This demonstrates why data quality rules and thresholds should be carefully defined and documented.
+
+
+### Experiment Results Comparison
+
+| Measurement | Original Ex | Modified Experiment |
+|---|---|---|
+| Height threshold | 72 inches | 70 inches |
+| Age threshold | 16 years | 16 years |
+| Patient records | 22 | 22 |
+| Anomalies identified | 3 | 4 |
+
+Lowering the height threshold identified one additional record, demonstrating how changes to screening rules can affect the number of records flagged for review.
