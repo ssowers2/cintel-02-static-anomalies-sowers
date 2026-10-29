@@ -1,0 +1,14 @@
+age_years,height_inches,quality_issue
+5,,Missing height
+,42,Missing age
+-3,38,Negative age
+7,-45,Negative height
+,49,Missing age
+3,0,Zero height
+11,,Missing height
+-1,39,Negative age
+,51,Missing age
+5,-2,Negative height
+4,,Missing height
+-2,40,Negative age
+,44,Missing age

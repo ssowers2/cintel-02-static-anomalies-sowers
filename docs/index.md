@@ -117,3 +117,7 @@ new observations arrive in a monitoring system.
 | Anomalies identified | 3 | 4 |
 
 Lowering the height threshold identified one additional record, demonstrating how changes to screening rules can affect the number of records flagged for review.
+
+### Custom Application: Pediatric Data Quality Validation
+
+This application uses Python and Polars to identify missing or invalid values in fictional pediatric patient records. Unlike the original example, which focuses on measurements exceeding upper thresholds, this project examines data completeness and validity. The goal is to demonstrate how automated validation checks can identify records that may need correction or further review.
