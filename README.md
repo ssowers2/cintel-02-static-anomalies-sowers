@@ -1,155 +1,216 @@
 # cintel-02-static-anomalies
 
 [![Python 3.14](https://img.shields.io/badge/python-3.14%2B-blue?logo=python)](pyproject.toml)
-[![CI](https://github.com/denisecase/cintel-02-static-anomalies/actions/workflows/ci-python-zensical.yml/badge.svg)](https://github.com/denisecase/cintel-02-static-anomalies/actions/workflows/ci-python-zensical.yml)
-[![Documentation](https://img.shields.io/badge/docs-site-blue?logo=github)](https://denisecase.github.io/cintel-02-static-anomalies/)
-
+[![CI](https://github.com/ssowers2/cintel-02-static-anomalies-sowers/actions/workflows/ci-python-zensical.yml/badge.svg)](https://github.com/ssowers2/cintel-02-static-anomalies-sowers/actions/workflows/ci-python-zensical.yml)
+[![Documentation](https://img.shields.io/badge/docs-site-blue?logo=github)](https://ssowers2.github.io/cintel-02-static-anomalies-sowers/)
 [![uv managed](https://img.shields.io/badge/uv-managed-DE5FE9)](https://docs.astral.sh/uv/)
-[![ty type checked](https://img.shields.io/badge/ty-type_checked-2F80ED)](https://docs.astral.sh/ty/)
 [![Zensical docs](https://img.shields.io/badge/Zensical-docs-purple)](https://zensical.org/)
 [![MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 
-> Detect unusual observations in static data using rule-based anomaly detection.
-
-## Project Overview
+> Exploring static anomaly detection and pediatric data quality validation using Python, Polars, and Plotly.
 
 **Author:** Sabriya Sowers
 **Date:** October 2026
+**Course:** Continuous Intelligence — Project 02
 
-This project explores static anomaly detection using fictional pediatric clinic data.
+## Pediatric Data Quality Dashboard
 
-The goal is to use Python and Polars to identify patient records with unusual age or height values based on predefined thresholds. Flagged records are saved for further review to help identify potential data quality issues.
+[![Pediatric Data Quality Dashboard](docs/assets/pediatric-data-quality-dashboard-fiction.png)](https://ssowers2.github.io/cintel-02-static-anomalies-sowers/)
 
-## Proposed Customization: Pediatric Data Quality Validation
+**[View the Interactive Dashboard](https://ssowers2.github.io/cintel-02-static-anomalies-sowers/)**
 
-This project will expand on the original static anomaly detection example by introducing additional data quality checks using fictional pediatric patient data.
+The dashboard summarizes automated validation of 50 fictional pediatric patient records:
 
-### Objective
+- **50** records analyzed
+- **37** records passed the defined checks (**74%**)
+- **13** records flagged for review (**26%**)
+- **5** categories of data quality issues evaluated
 
-The goal is to identify potential data quality issues that may affect the accuracy and reliability of healthcare reporting.
+Click the screenshot to explore the interactive Plotly dashboard on GitHub Pages.
 
-### Planned Enhancements
+## Project Overview
 
-- **Missing Values:** Identify records with missing patient ages or heights.
-- **Invalid Ages:** Flag records containing negative age values.
-- **Unusual Measurements:** Continue using predefined thresholds to identify unusual patient ages and heights.
-- **Exception Reporting:** Generate a CSV file containing records that require further review.
+This project demonstrates how Python can identify unusual, missing, and invalid values in structured healthcare data. It includes three stages:
 
-### Tools and Techniques
+- **D1 — Original Example:** Run a static anomaly detection pipeline using predefined thresholds.
+- **D2 — Custom Experiment:** Adjust the height threshold and compare results.
+- **D3 — Custom Application:** Build a separate pediatric data quality validation pipeline and interactive dashboard.
 
-The project will continue using Python and Polars for data processing, rule-based anomaly detection, and CSV reporting.
+All records are fictional and used for educational purposes. No real patient information or protected health information (PHI) is included.
 
-### Expected Outcome
+## D1: Original Static Anomaly Detection
 
-The customized project will demonstrate how automated data quality checks can help identify potential errors and inconsistencies before data is used for reporting. Flagged records will be treated as exceptions requiring investigation rather than automatically classified as incorrect data.
+The original dataset contains **22 fictional pediatric clinic observations**, with two fields:
 
-The project is configured in [pyproject.toml](pyproject.toml).
+- `age_years` — patient age in years
+- `height_inches` — patient height in inches
 
-## Data
+The original pipeline flags records where **age is at least 16 years** or **height is at least 72 inches**.
 
-This project uses a fictional pediatric clinic dataset located in `data/clinic_data.csv`.
+**Original result:** 3 of 22 records were flagged. These thresholds are instructional examples, not clinical standards.
 
-Each patient observation includes:
+## D2: Custom Threshold Experiment
 
-- `age_years` - Patient age in years.
-- `height_inches` - Patient height in inches.
+I lowered the height threshold from **72 inches to 70 inches**, keeping the age threshold unchanged, to investigate how a small rule change affects the results.
 
-The dataset is used to explore how predefined thresholds can identify unusual patient measurements that may require further investigation.
+| Measurement | Original | Modified |
+|---|---:|---:|
+| Age threshold | 16 years | 16 years |
+| Height threshold | 72 inches | 70 inches |
+| Records analyzed | 22 | 22 |
+| Records flagged | 3 | 4 |
 
-The thresholds are for instructional purposes and are not clinical standards.
+**Finding:** Lowering the height threshold flagged one additional record. This illustrates why screening rules and their changes should be carefully defined and documented.
 
-## Approach
+## D3: Custom Pediatric Data Quality Validation
 
-The pipeline uses Polars to read the dataset,
-apply anomaly rules, and save flagged observations.
+### Objective and Dataset
 
-Explore these project components:
+I created a separate application to detect missing or invalid values before data is used for reporting and analysis. Unlike the original example, this application focuses on **data completeness and basic validity**, not unusually high measurements.
 
-- [pyproject.toml](pyproject.toml) - project configuration and dependencies.
-- [src/cintel/anomaly_detector.py](src/cintel/anomaly_detector.py) - anomaly detection pipeline.
-- [data/](data/) - input data.
-- [artifacts/](artifacts/) - generated results.
-- [tests/](tests/) - automated tests.
-- [.github/workflows/](.github/workflows/) - automated checks and documentation deployment.
-- [docs/](docs/) - project documentation.
+The custom dataset contains **50 synthetic pediatric records** with `age_years` and `height_inches` fields.
+
+[View the custom pediatric dataset](data/pediatric_quality_data.csv)
+
+### Validation Rules
+
+Using Python and Polars, the pipeline identifies five issue categories:
+
+1. Missing age
+2. Missing height
+3. Negative age
+4. Negative height
+5. Zero height
+
+Flagged records are saved to [`artifacts/pediatric_quality_issues.csv`](artifacts/pediatric_quality_issues.csv).
+
+### Validation Results
+
+| Data quality issue | Records flagged |
+|---|---:|
+| Missing age | 4 |
+| Missing height | 3 |
+| Negative age | 3 |
+| Negative height | 2 |
+| Zero height | 1 |
+| **Total** | **13** |
+
+**37 of 50 records (74%) passed** the defined checks; **13 (26%) were flagged**. Missing age was the most frequently identified issue.
+
+### Interactive Dashboard
+
+The Plotly dashboard presents KPI cards, a pass-versus-flagged donut chart, an issue-category bar chart, and interactive tooltips.
+
+[Open the interactive dashboard on GitHub Pages](https://ssowers2.github.io/cintel-02-static-anomalies-sowers/)
+
+### Limitations
+
+The application checks five basic conditions but does not assess age-specific clinical expectations. Each flagged record receives only its first detected issue, so additional issues within the same record may not be reported. Passing these checks does not guarantee clinical accuracy or overall data quality.
+
+## Project Structure
+
+| File or folder | Purpose |
+|---|---|
+| `data/clinic_data.csv` | Original fictional pediatric dataset |
+| `data/pediatric_quality_data.csv` | Custom 50-record dataset |
+| `src/cintel/anomaly_detector.py` | Original and modified threshold-based pipeline |
+| `src/cintel/pediatric_quality.py` | Custom data quality validation pipeline |
+| `src/cintel/pediatric_dashboard.py` | Plotly dashboard generator |
+| `src/cintel/utils_clinic.py` | Shared clinic data processing functions |
+| `artifacts/anomalies.csv` | Threshold-based anomaly results |
+| `artifacts/pediatric_quality_issues.csv` | Custom validation results |
+| `docs/index.md` | Documentation and embedded dashboard |
+| `docs/assets/pediatric_dashboard.html` | Interactive dashboard HTML |
+| `docs/assets/pediatric-data-quality-dashboard-fiction.png` | README dashboard preview image |
+
+## Tools and Technologies
+
+- **Python 3.14** — application development
+- **Polars** — CSV processing and validation
+- **Plotly** — interactive charts
+- **uv** — environment and dependency management
+- **VS Code** — development
+- **Ruff, ty, pytest, and Prek** — code quality, type checking, testing, and Git hooks
+- **Zensical and GitHub Pages** — documentation and publishing
 
 ## Run the Project
 
-Follow the [Professional Python Workflow Guide](https://denisecase.github.io/pro-analytics-02/)
-to set up your machine and project environment.
+Follow the [Professional Python Workflow Guide](https://denisecase.github.io/pro-analytics-02/) for environment setup. From a VS Code terminal in the project root:
 
-From a VS Code terminal in the project root:
+```shell
+uv sync
+```
+
+### Run the Original or Modified Anomaly Detection Pipeline
 
 ```shell
 uv run python -m cintel.anomaly_detector
 ```
 
-## Run the Reactive App
+Results are written to `artifacts/anomalies.csv`.
 
-From a VS Code terminal in the project root
-(hit CTRL + c to quit):
-
-```shell
-uv run marimo run  src/cintel/app.py
-```
-
-## Results
-
-The pipeline identifies observations that
-meet the defined anomaly criteria
-and writes the flagged records to artifacts/anomalies.csv.
-Review the generated CSV to understand which observations were flagged
-and why.
-
-Successful execution produces:
+### Run the Custom Data Quality Pipeline
 
 ```shell
-========================
-Pipeline executed successfully!
-========================
+uv run python -m cintel.pediatric_quality
 ```
 
-A `project.log` file is created in the project root.
+Results are written to `artifacts/pediatric_quality_issues.csv`.
 
-This confirms that the Python pipeline executes
-and the logging system works.
+### Generate the Interactive Dashboard
+
+Run the custom validation pipeline first, then:
+
+```shell
+uv run python -m cintel.pediatric_dashboard
+```
+
+This generates `docs/assets/pediatric_dashboard.html`. The dashboard loads Plotly JavaScript from a CDN, so an internet connection is required for its interactive features.
+
+### Run the Reactive App
+
+```shell
+uv run marimo run src/cintel/app.py
+```
+
+Press **Ctrl + C** to stop the app.
 
 ## Verification
 
-Run the automated tests:
+Run tests and code-quality checks:
 
 ```shell
 uv run pytest
+uv run ruff check . --fix
+uv run ruff format .
+uv run ty check
+```
+
+Build or preview the documentation:
+
+```shell
+uv run python -m zensical build
+uv run python -m zensical serve
 ```
 
 ## Project Documentation
 
-The [hosted documentation site](https://denisecase.github.io/cintel-02-static-anomalies/)
-is published using Zensical and GitHub Pages.
+The documentation site covers the original example, threshold experiment, custom data quality application, and embedded dashboard.
 
-The documentation site is used to present the project report,
-covering such sections as data, methods, results, visualizations,
-interpretation, and conclusions.
+**[View the published project documentation](https://ssowers2.github.io/cintel-02-static-anomalies-sowers/)**
 
 ## CI/CD and GitHub Actions
 
-This project includes continuous integration and continuous deployment (CI/CD)
-to check project files and publish the docs.
-GitHub Actions include:
+The project includes workflows for checks and documentation deployment:
 
-- [CI: Python and Documentation Checks](https://github.com/denisecase/cintel-02-static-anomalies/actions/workflows/ci-python-zensical.yml)
-- [CD: Documentation Deployment](https://github.com/denisecase/cintel-02-static-anomalies/actions/workflows/deploy-zensical.yml)
+- [CI: Python and Documentation Checks](https://github.com/ssowers2/cintel-02-static-anomalies-sowers/actions/workflows/ci-python-zensical.yml)
+- [CD: Documentation Deployment](https://github.com/ssowers2/cintel-02-static-anomalies-sowers/actions/workflows/deploy-zensical.yml)
 
 ## Developer Reference
 
-Follow the
-[Professional Python Workflow Guide](https://denisecase.github.io/pro-analytics-02/)
-for **detailed instructions and troubleshooting**.
+See the [Professional Python Workflow Guide](https://denisecase.github.io/pro-analytics-02/) for setup and troubleshooting.
 
 ### Initialize and Update the Python Environment
-
-With the project open in VS Code, open a VS Code terminal.
-Paste each command and hit Enter or Return after to run it.
 
 ```shell
 uvx pup-clean --delete
@@ -163,67 +224,54 @@ uv audit
 
 ### Set Up and Run Git Hooks
 
-Set up and run the git hooks to perform
-basic checks automatically before
-any changes get pushed to GitHub.
-
-In the VS Code terminal,
-paste each command and hit Enter or Return after to run it.
-
 ```shell
 uvx prek install --force
 uvx prek update --freeze --cooldown-days 7
 
 git add -A
 uvx prek run --all-files
-# repeat if changes were made
-uvx prek run --all-files
 ```
 
-### Run Common Chores
+If hooks modify files, stage those changes and rerun the checks.
 
-Run linters, formatters, type checks, tests, and
-build the documentation.
+### Run Common Chores
 
 ```shell
 uv run ruff check . --fix
 uv run ruff format .
-
 uv run ty check
 uv run python -m pytest
 uv run python -m zensical build
 ```
 
-### Git add-commit-push to GitHub
-
-After making useful changes, save your work to GitHub.
+### Git Add, Commit, and Push
 
 ```shell
 git add -A
-git commit -m "describe your changes in quotes"
-git push -u origin main
+git commit -m "Describe your changes"
+git push origin main
 ```
 
 ## Developer Notes
 
-- Use the **UP ARROW** and **DOWN ARROW** in the terminal to scroll through past commands.
-- Use `CTRL+f` to find (and replace) text within a file.
+- Use **Up Arrow** and **Down Arrow** in the terminal to navigate command history.
+- Use **Ctrl + F** to find text in a file.
+- Review `git status` before committing.
 
 ## Developer Tools
 
-This project uses professional Python tools to support development,
-testing, documentation, and code quality.
-
-- [uv](https://docs.astral.sh/uv/) - Python environments and dependencies.
-- [Ruff](https://docs.astral.sh/ruff/) - Python linting and formatting, configured in [.ruff.toml](.ruff.toml).
-- [ty](https://docs.astral.sh/ty/) - Python type checking.
-- [pytest](https://docs.pytest.org/) - automated Python testing, configured in [.pytest.toml](.pytest.toml).
-- [prek](https://prek.j178.dev/) - Git hooks and automated checks, configured in [prek.toml](prek.toml).
-- [Zensical](https://zensical.org/) - project documentation, configured in [zensical.toml](zensical.toml).
+- [uv](https://docs.astral.sh/uv/) — Python environments and dependencies
+- [Ruff](https://docs.astral.sh/ruff/) — linting and formatting
+- [ty](https://docs.astral.sh/ty/) — type checking
+- [pytest](https://docs.pytest.org/) — automated tests
+- [Prek](https://prek.j178.dev/) — Git hooks
+- [Zensical](https://zensical.org/) — documentation
+- [Plotly](https://plotly.com/python/) — interactive visualizations
 
 ## Links
 
-- [Hosted Documentation](https://denisecase.github.io/cintel-02-static-anomalies/)
+- [GitHub Repository](https://github.com/ssowers2/cintel-02-static-anomalies-sowers)
+- [Hosted Documentation and Dashboard](https://ssowers2.github.io/cintel-02-static-anomalies-sowers/)
 - [Professional Python Workflow Guide](https://denisecase.github.io/pro-analytics-02/)
 - [Citation](CITATION.cff)
 - [License](LICENSE)
