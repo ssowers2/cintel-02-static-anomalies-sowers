@@ -19,12 +19,14 @@
 
 **[View the Interactive Dashboard](https://ssowers2.github.io/cintel-02-static-anomalies-sowers/)**
 
-The dashboard summarizes automated validation of 50 fictional pediatric patient records:
+The interactive dashboard summarizes the results of automated data quality validation on 50 fictional pediatric patient records.
 
-- **50** records analyzed
-- **37** records passed the defined checks (**74%**)
-- **13** records flagged for review (**26%**)
-- **5** categories of data quality issues evaluated
+- **50 records analyzed**
+- **37 records passed validation (74%)**
+- **13 records flagged for review (26%)**
+- **5 data quality issue categories evaluated**
+
+The dashboard was developed using Python, Polars, and Plotly. Click the image above to explore the interactive version on GitHub Pages.
 
 Click the screenshot to explore the interactive Plotly dashboard on GitHub Pages.
 
