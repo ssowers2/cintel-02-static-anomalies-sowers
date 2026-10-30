@@ -27,8 +27,9 @@ dependencies = [
     # REQ.DEPS: External packages used by the project code.
     "datafun-toolkit",
     "marimo", # WHY: Enables reactive web app for app.py.
+    "plotly>=7.1.0",
     "polars[rtcompat]", # WHY: Fast DataFrame processing; rtcompat supports older CPUs.
-                        # OBS: If Polars causes issues, use pandas and adapt DataFrame operations.
+    # OBS: If Polars causes issues, use pandas and adapt DataFrame operations.
 ]
 
 # ============================================================

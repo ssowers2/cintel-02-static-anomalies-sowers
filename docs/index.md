@@ -121,3 +121,52 @@ Lowering the height threshold identified one additional record, demonstrating ho
 ### Custom Application: Pediatric Data Quality Validation
 
 This application uses Python and Polars to identify missing or invalid values in fictional pediatric patient records. Unlike the original example, which focuses on measurements exceeding upper thresholds, this project examines data completeness and validity. The goal is to demonstrate how automated validation checks can identify records that may need correction or further review.
+
+#### Dataset and Validation Methods
+
+I created a synthetic dataset containing 50 fictional pediatric patient records. Each record includes two fields: `age_years` and `height_inches`.
+
+Using Python and Polars, I developed validation rules to identify five types of data quality issues:
+
+- Missing age
+- Missing height
+- Negative age
+- Negative height
+- Zero height
+
+These rules focus on data completeness and basic validity rather than clinical diagnosis. The application saves flagged records to `artifacts/pediatric_quality_issues.csv`.
+
+#### Validation Results
+
+The application analyzed 50 records and identified 13 records requiring review. The remaining 37 records passed the defined validation checks.
+
+| Data Quality Issue | Records Flagged |
+|---|---:|
+| Missing age | 4 |
+| Missing height | 3 |
+| Negative age | 3 |
+| Negative height | 2 |
+| Zero height | 1 |
+| **Total** | **13** |
+
+Overall, **74% of records passed** the validation checks, while **26% were flagged for review**.
+
+The results demonstrate how automated data quality checks can help identify incomplete or invalid records before they are used for reporting and analysis.
+
+Because this is a fictional dataset, no real patient information or protected health information (PHI) was used.
+
+#### Limitations
+
+The application checks five basic data quality conditions. It does not evaluate age-specific height expectations or other clinical plausibility rules. Each flagged record is assigned its first detected issue, so additional issues in the same record may not be displayed.
+
+#### Interactive Pediatric Data Quality Dashboard
+
+The dashboard below summarizes the results of the pediatric data quality validation process. It displays the total records analyzed, records that passed validation, records flagged for review, and the frequency of each data quality issue.
+
+<iframe
+    src="assets/pediatric_dashboard.html"
+    width="100%"
+    height="850"
+    title="Interactive Pediatric Data Quality Dashboard"
+    style="border: none;"
+></iframe>
