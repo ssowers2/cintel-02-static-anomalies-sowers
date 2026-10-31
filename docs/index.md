@@ -155,6 +155,21 @@ The results demonstrate how automated data quality checks can help identify inco
 
 Because this is a fictional dataset, no real patient information or protected health information (PHI) was used.
 
+#### Verification
+
+I reran the pediatric data quality validation pipeline using the same
+50-record synthetic dataset and confirmed that the results were repeatable.
+
+Both runs identified 13 records with data quality issues and 37 records
+without identified issues.
+
+I also checked the issue counts by category. The five categories totaled
+13 flagged records, consistent with the pipeline output and dashboard.
+
+The interactive Plotly dashboard was opened and visually reviewed to
+confirm that its KPI values, chart labels, and issue counts matched
+the validation results.
+
 #### Limitations
 
 The application checks five basic data quality conditions. It does not evaluate age-specific height expectations or other clinical plausibility rules. Each flagged record is assigned its first detected issue, so additional issues in the same record may not be displayed.
